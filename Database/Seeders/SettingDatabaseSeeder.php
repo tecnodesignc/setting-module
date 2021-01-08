@@ -28,7 +28,7 @@ class SettingDatabaseSeeder extends Seeder
       Model::unguard();
 
       $settingsToCreate = [
-        'core::template' => 'Flatly',
+        'core::template' => 'Encore',
         'core::locales' => ['en'],
       ];
 

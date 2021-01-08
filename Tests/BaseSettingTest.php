@@ -15,7 +15,7 @@ abstract class BaseSettingTest extends TestCase
      */
     protected $settingRepository;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -40,7 +40,7 @@ abstract class BaseSettingTest extends TestCase
             'driver' => 'sqlite',
             'database' => ':memory:',
             'prefix' => '',
-        ));
+        ]);
         $app['config']->set('encore.core.settings', [
             'site-name' => [
                 'description' => 'core::settings.site-name',

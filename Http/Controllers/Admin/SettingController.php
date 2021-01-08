@@ -18,7 +18,7 @@ class SettingController extends AdminBaseController
      */
     private $setting;
     /**
-     * @var Module
+     * @var RepositoryInterface
      */
     private $module;
     /**
