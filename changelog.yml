@@ -1,8 +1,12 @@
-url: https://github.com/EncoreCms/Platform
+url: https://github.com/tecnodesignc/setting-module
 versions:
-    "1.0.0":
-        added:
-            - Initial Version Module
-    "1.0.1":
-        changed:
-            - Laravel 8.x compatibility for fields.blade.php
+
+  "2.0.0":
+    changed:
+      - Laravel 9 compatibility
+  "1.0.1":
+    changed:
+      - Laravel 8.x compatibility for fields.blade.php
+  "1.0.0":
+    added:
+      - Initial Version Module

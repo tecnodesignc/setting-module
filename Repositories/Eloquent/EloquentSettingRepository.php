@@ -2,6 +2,7 @@
 
 namespace Modules\Setting\Repositories\Eloquent;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Config;
 use Modules\Core\Repositories\Eloquent\EloquentBaseRepository;
 use Modules\Setting\Entities\Setting;
@@ -13,21 +14,13 @@ use Modules\Setting\Repositories\SettingRepository;
 
 class EloquentSettingRepository extends EloquentBaseRepository implements SettingRepository
 {
-    /**
-     * Update a resource
-     * @param $id
-     * @param $data
-     * @return mixed
-     */
-    public function update($id, $data)
-    {
-    }
+
 
     /**
-     * Return all settings, with the setting name as key
-     * @return array
+     * Return a collection of all elements of the resource
+     * @return Collection
      */
-    public function all()
+    public function all(): Collection
     {
         $rawSettings = parent::all();
 
@@ -42,9 +35,9 @@ class EloquentSettingRepository extends EloquentBaseRepository implements Settin
     /**
      * Create or update the settings
      * @param $settings
-     * @return mixed|void
+     * @return void
      */
-    public function createOrUpdate($settings)
+    public function createOrUpdate($settings): void
     {
         $this->removeTokenKey($settings);
 
@@ -78,10 +71,10 @@ class EloquentSettingRepository extends EloquentBaseRepository implements Settin
 
     /**
      * Find a setting by its name
-     * @param $settingName
+     * @param string $settingName
      * @return mixed
      */
-    public function findByName($settingName)
+    public function findByName(string $settingName): mixed
     {
         return $this->model->where('name', $settingName)->first();
     }
@@ -90,9 +83,9 @@ class EloquentSettingRepository extends EloquentBaseRepository implements Settin
      * Create a setting with the given name
      * @param string $settingName
      * @param $settingValues
-     * @return Setting
+     * @return void
      */
-    private function createForName($settingName, $settingValues)
+    private function createForName(string $settingName, $settingValues): void
     {
         event($event = new SettingIsCreating($settingName, $settingValues));
 
@@ -111,7 +104,6 @@ class EloquentSettingRepository extends EloquentBaseRepository implements Settin
 
         event(new SettingWasCreated($setting, $settingValues));
 
-        return $setting;
     }
 
     /**
@@ -119,7 +111,7 @@ class EloquentSettingRepository extends EloquentBaseRepository implements Settin
      * @param object setting
      * @param $settingValues
      */
-    private function updateSetting($setting, $settingValues)
+    private function updateSetting($setting, $settingValues): void
     {
         $name = $setting->name;
         event($event = new SettingIsUpdating($setting, $name, $settingValues));
@@ -133,7 +125,6 @@ class EloquentSettingRepository extends EloquentBaseRepository implements Settin
 
         event(new SettingWasUpdated($setting, $settingValues));
 
-        return $setting;
     }
 
     /**
@@ -150,10 +141,10 @@ class EloquentSettingRepository extends EloquentBaseRepository implements Settin
     /**
      * Return all modules that have settings
      * with its settings
-     * @param  array|string $modules
+     * @param array|string $modules
      * @return array
      */
-    public function moduleSettings($modules)
+    public function moduleSettings(array|string $modules):array
     {
         if (is_string($modules)) {
             return config('encore.' . strtolower($modules) . ".settings");
@@ -172,9 +163,9 @@ class EloquentSettingRepository extends EloquentBaseRepository implements Settin
     /**
      * Return the saved module settings
      * @param $module
-     * @return mixed
+     * @return array
      */
-    public function savedModuleSettings($module)
+    public function savedModuleSettings($module): array
     {
         $moduleSettings = [];
         foreach ($this->findByModule($module) as $setting) {
@@ -186,20 +177,20 @@ class EloquentSettingRepository extends EloquentBaseRepository implements Settin
 
     /**
      * Find settings by module name
-     * @param  string $module Module name
+     * @param string $module Module name
      * @return mixed
      */
-    public function findByModule($module)
+    public function findByModule(string $module): mixed
     {
         return $this->model->where('name', 'LIKE', $module . '::%')->get();
     }
 
     /**
      * Find the given setting name for the given module
-     * @param  string $settingName
+     * @param string $settingName
      * @return mixed
      */
-    public function get($settingName)
+    public function get(string $settingName): mixed
     {
         return $this->model->where('name', 'LIKE', "{$settingName}")->first();
     }
@@ -207,9 +198,9 @@ class EloquentSettingRepository extends EloquentBaseRepository implements Settin
     /**
      * Return the translatable module settings
      * @param $module
-     * @return mixed
+     * @return array
      */
-    public function translatableModuleSettings($module)
+    public function translatableModuleSettings($module): array
     {
         return array_filter($this->moduleSettings($module), function ($setting) {
             return isset($setting['translatable']) && $setting['translatable'] === true;
@@ -221,7 +212,7 @@ class EloquentSettingRepository extends EloquentBaseRepository implements Settin
      * @param $module
      * @return array
      */
-    public function plainModuleSettings($module)
+    public function plainModuleSettings($module): array
     {
         return array_filter($this->moduleSettings($module), function ($setting) {
             return !isset($setting['translatable']) || $setting['translatable'] === false;
@@ -233,7 +224,7 @@ class EloquentSettingRepository extends EloquentBaseRepository implements Settin
      * @param string $settingName
      * @return string
      */
-    private function getConfigSettingName($settingName)
+    private function getConfigSettingName(string $settingName): string
     {
         list($module, $setting) = explode('::', $settingName);
 
@@ -245,7 +236,7 @@ class EloquentSettingRepository extends EloquentBaseRepository implements Settin
      * @param string $settingName
      * @return bool
      */
-    private function isTranslatableSetting($settingName)
+    private function isTranslatableSetting(string $settingName): bool
     {
         $configSettingName = $this->getConfigSettingName($settingName);
 
@@ -256,10 +247,10 @@ class EloquentSettingRepository extends EloquentBaseRepository implements Settin
 
     /**
      * Return the setting value(s). If values are ann array, json_encode them
-     * @param string|array $settingValues
-     * @return string
+     * @param mixed $settingValues
+     * @return mixed
      */
-    private function getSettingPlainValue($settingValues)
+    private function getSettingPlainValue(mixed $settingValues): mixed
     {
         if (is_array($settingValues)) {
             return json_encode($settingValues);

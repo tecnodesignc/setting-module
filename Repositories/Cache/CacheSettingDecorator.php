@@ -18,28 +18,28 @@ class CacheSettingDecorator extends BaseCacheDecorator implements SettingReposit
     /**
      * Create or update the settings
      * @param $settings
-     * @return mixed
+     * @return void
      */
-    public function createOrUpdate($settings)
+    public function createOrUpdate($settings): void
     {
 
         $this->clearCache();
 
-        return $this->repository->createOrUpdate($settings);
+        $this->repository->createOrUpdate($settings);
     }
 
     /**
      * Find a setting by its name
-     * @param $settingName
+     * @param string $settingName
      * @return mixed
      */
-    public function findByName($settingName)
+    public function findByName(string $settingName): mixed
     {
         $settingValue = $this->remember(function () use ($settingName) {
-            return $this->repository->findByName($settingName) ?? $settingName.'___NULL';
+            return $this->repository->findByName($settingName) ?? $settingName . '___NULL';
         });
 
-        if($settingValue===$settingName.'___NULL') $settingValue = null;
+        if ($settingValue === $settingName . '___NULL') $settingValue = null;
 
         return $settingValue;
     }
@@ -47,10 +47,10 @@ class CacheSettingDecorator extends BaseCacheDecorator implements SettingReposit
     /**
      * Return all modules that have settings
      * with its settings
-     * @param  array|string $modules
+     * @param array|string $modules
      * @return array
      */
-    public function moduleSettings($modules)
+    public function moduleSettings(array|string $modules): array
     {
         return $this->remember(function () use ($modules) {
             return $this->repository->moduleSettings($modules);
@@ -62,7 +62,7 @@ class CacheSettingDecorator extends BaseCacheDecorator implements SettingReposit
      * @param $module
      * @return mixed
      */
-    public function savedModuleSettings($module)
+    public function savedModuleSettings($module): mixed
     {
         return $this->remember(function () use ($module) {
             return $this->repository->savedModuleSettings($module);
@@ -71,10 +71,10 @@ class CacheSettingDecorator extends BaseCacheDecorator implements SettingReposit
 
     /**
      * Find settings by module name
-     * @param  string $module
+     * @param string $module
      * @return mixed
      */
-    public function findByModule($module)
+    public function findByModule(string $module): mixed
     {
         return $this->remember(function () use ($module) {
             return $this->repository->findByModule($module);
@@ -83,10 +83,10 @@ class CacheSettingDecorator extends BaseCacheDecorator implements SettingReposit
 
     /**
      * Find the given setting name for the given module
-     * @param  string $settingName
+     * @param string $settingName
      * @return mixed
      */
-    public function get($settingName)
+    public function get(string $settingName): mixed
     {
         return $this->remember(function () use ($settingName) {
             return $this->repository->get($settingName);
@@ -98,7 +98,7 @@ class CacheSettingDecorator extends BaseCacheDecorator implements SettingReposit
      * @param $module
      * @return array
      */
-    public function translatableModuleSettings($module)
+    public function translatableModuleSettings($module): array
     {
         return $this->remember(function () use ($module) {
             return $this->repository->translatableModuleSettings($module);
@@ -110,7 +110,7 @@ class CacheSettingDecorator extends BaseCacheDecorator implements SettingReposit
      * @param $module
      * @return array
      */
-    public function plainModuleSettings($module)
+    public function plainModuleSettings($module): array
     {
         return $this->remember(function () use ($module) {
             return $this->repository->plainModuleSettings($module);

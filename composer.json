@@ -16,22 +16,22 @@
     ],
     "support": {
         "email": "support@tecnodesign.com.co",
-        "issues": "https://github.com/tecnodesignc/Platform/issues",
-        "source": "https://github.com/tecnodesignc/Setting"
+        "issues": "https://github.com/tecnodesignc/encorecms/issues",
+        "source": "https://github.com/tecnodesignc/setting-module"
     },
     "require": {
-        "php": ">=7.1.0",
-        "composer/installers": "~1.0",
-        "doctrine/dbal": "~2.5"
+        "php": ">=8.0",
+        "composer/installers": "^2.1",
+        "doctrine/dbal": "^3.3"
     },
     "require-dev": {
-        "phpunit/phpunit": "~6.0",
-        "orchestra/testbench": "3.5.*"
+        "phpunit/phpunit": "^9.5",
+        "orchestra/testbench": "3.6.*"
     },
-    "autoload-dev": {
+    "autoload": {
         "psr-4": {
             "Modules\\Setting\\": ".",
-            "Modules\\": "Modules/"
+            "Modules\\": "modules/"
         }
     },
     "extra": {

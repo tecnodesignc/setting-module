@@ -6,7 +6,10 @@ use Illuminate\Support\Facades\Facade;
 
 final class SettingDirective extends Facade
 {
-    protected static function getFacadeAccessor()
+    /**
+     * @return string
+     */
+    protected static function getFacadeAccessor(): string
     {
         return 'setting.setting.directive';
     }

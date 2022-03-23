@@ -10,24 +10,24 @@ interface Setting
      * @param  string $key
      * @return bool
      */
-    public function has($key);
+    public function has(string $key): bool;
 
     /**
      * Get the specified configuration value in the given language
      *
-     * @param  string $key
-     * @param  string $locale
-     * @param  mixed  $default
+     * @param string $key
+     * @param string|null $locale
+     * @param mixed $default
      * @return string
      */
-    public function get($key, $locale = null, $default = null);
+    public function get(string $key, string $locale = null, string $default = null): string;
 
     /**
      * Set a given configuration value.
      *
-     * @param  string $key
-     * @param  mixed  $value
+     * @param string $key
+     * @param mixed $value
      * @return \Modules\Setting\Entities\Setting
      */
-    public function set($key, $value);
+    public function set(string $key, mixed $value): \Modules\Setting\Entities\Setting;
 }

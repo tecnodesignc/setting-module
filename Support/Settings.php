@@ -10,7 +10,7 @@ class Settings implements Setting
     /**
      * @var SettingRepository
      */
-    private $setting;
+    private SettingRepository $setting;
 
     /**
      * @param SettingRepository $setting
@@ -21,13 +21,14 @@ class Settings implements Setting
     }
 
     /**
-     * Getting the setting
-     * @param  string $name
-     * @param  string   $locale
-     * @param  string   $default
-     * @return mixed
+     * Get the specified configuration value in the given language
+     *
+     * @param string $name
+     * @param string|null $locale
+     * @param mixed $default
+     * @return string
      */
-    public function get($name, $locale = null, $default = null)
+    public function get(string $name, string $locale = null, $default = null): string
     {
         $defaultFromConfig = $this->getDefaultFromConfigFor($name);
 
@@ -57,7 +58,7 @@ class Settings implements Setting
      * @param  string $name
      * @return bool
      */
-    public function has($name)
+    public function has(string $name): bool
     {
         $default = microtime(true);
 
@@ -71,7 +72,7 @@ class Settings implements Setting
      * @param  mixed  $value
      * @return \Modules\Setting\Entities\Setting
      */
-    public function set($key, $value)
+    public function set(string $key, mixed $value): \Modules\Setting\Entities\Setting
     {
         return $this->setting->create([
             'name' => $key,
@@ -85,7 +86,7 @@ class Settings implements Setting
      * @param string $name
      * @return string
      */
-    private function getDefaultFromConfigFor($name)
+    private function getDefaultFromConfigFor(string $name): string
     {
         list($module, $settingName) = explode('::', $name);
 

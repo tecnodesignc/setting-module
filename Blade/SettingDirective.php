@@ -7,22 +7,23 @@ use Illuminate\Support\Arr;
 final class SettingDirective
 {
     /**
-     * @var string
+     * @var null|string
      */
-    private $settingName;
+    private null|string $settingName;
     /**
-     * @var string
+     * @var null|string
      */
-    private $locale;
+    private null|string $locale;
     /**
-     * @var string Default value
+     * @var null|string Default value
      */
-    private $default;
+    private null|string $default;
 
     /**
      * @param $arguments
+     * @return string
      */
-    public function show($arguments)
+    public function show($arguments): string
     {
         $this->extractArguments($arguments);
 
