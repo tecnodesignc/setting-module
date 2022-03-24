@@ -1,7 +1,7 @@
 {
     "name": "tecnodesignc/setting-module",
     "type": "encore-module",
-    "description": "Setting module for EncoreCMS. Handles all the site settings.",
+    "description": "Setting module for EncoreCMS 2. Handles all the site settings.",
     "keywords": [
         "encorecms",
         "settings"

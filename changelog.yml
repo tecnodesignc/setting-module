@@ -1,6 +1,8 @@
 url: https://github.com/tecnodesignc/setting-module
 versions:
-
+  "2.0.1":
+    changed:
+      - Events Class compatible with Media Events
   "2.0.0":
     changed:
       - Laravel 9 compatibility

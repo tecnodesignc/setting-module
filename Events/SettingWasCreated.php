@@ -2,6 +2,7 @@
 
 namespace Modules\Setting\Events;
 
+use Illuminate\Database\Eloquent\Model;
 use Modules\Media\Contracts\StoringMedia;
 use Modules\Setting\Entities\Setting;
 
@@ -10,12 +11,12 @@ class SettingWasCreated implements StoringMedia
     /**
      * @var Setting
      */
-    public $setting;
+    public Setting $setting;
 
     /**
      * @var array
      */
-    public $data;
+    public array $data;
 
     public function __construct(Setting $setting, $data)
     {
@@ -24,17 +25,19 @@ class SettingWasCreated implements StoringMedia
     }
 
     /**
-     * @inheritDoc
+     * Return the entity
+     * @return Model
      */
-    public function getEntity()
+    public function getEntity(): Model
     {
         return $this->setting;
     }
 
     /**
-     * @inheritDoc
+     * Return the ALL data sent
+     * @return array
      */
-    public function getSubmissionData()
+    public function getSubmissionData(): array
     {
         return $this->data;
     }
