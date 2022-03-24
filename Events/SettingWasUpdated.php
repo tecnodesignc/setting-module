@@ -2,6 +2,7 @@
 
 namespace Modules\Setting\Events;
 
+use Illuminate\Database\Eloquent\Model;
 use Modules\Media\Contracts\StoringMedia;
 
 use Modules\Setting\Entities\Setting;
@@ -28,7 +29,7 @@ class SettingWasUpdated implements StoringMedia
      * Return the entity
      * @return Model
      */
-    public function getEntity(): Model
+    public function getEntity(): Setting
     {
         return $this->setting;
     }

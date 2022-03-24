@@ -26,9 +26,9 @@ class SettingWasCreated implements StoringMedia
 
     /**
      * Return the entity
-     * @return Model
+     * @return Setting
      */
-    public function getEntity(): Model
+    public function getEntity(): Setting
     {
         return $this->setting;
     }

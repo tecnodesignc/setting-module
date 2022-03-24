@@ -1,5 +1,10 @@
 url: https://github.com/tecnodesignc/setting-module
 versions:
+  "2.0.2":
+    chnaged:
+      - SettingWasCreated in EloquentSettingRepository
+      - Key for moduleSettings in CacheSettingDecorator
+      - WasEvent type return to Setting
   "2.0.1":
     changed:
       - Events Class compatible with Media Events

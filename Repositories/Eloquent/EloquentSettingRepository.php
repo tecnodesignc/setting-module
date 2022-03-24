@@ -102,7 +102,7 @@ class EloquentSettingRepository extends EloquentBaseRepository implements Settin
 
         $setting->save();
 
-        event(new SettingWasCreated($setting, $settingValues));
+        event(new SettingWasCreated($setting, ['name'=>$settingName, 'value'=>$settingValues]));
 
     }
 
@@ -123,7 +123,7 @@ class EloquentSettingRepository extends EloquentBaseRepository implements Settin
         }
         $setting->save();
 
-        event(new SettingWasUpdated($setting, $settingValues));
+        event(new SettingWasUpdated($setting,['name'=>$name, 'value'=>$settingValues]));
 
     }
 

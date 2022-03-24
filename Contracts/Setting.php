@@ -18,9 +18,9 @@ interface Setting
      * @param string $key
      * @param string|null $locale
      * @param mixed $default
-     * @return string
+     * @return null|string
      */
-    public function get(string $key, string $locale = null, string $default = null): string;
+    public function get(string $key, string $locale = null, string $default = null): ?string;
 
     /**
      * Set a given configuration value.

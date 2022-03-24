@@ -54,7 +54,7 @@ class CacheSettingDecorator extends BaseCacheDecorator implements SettingReposit
     {
         return $this->remember(function () use ($modules) {
             return $this->repository->moduleSettings($modules);
-        });
+        },$this->entityName);
     }
 
     /**
