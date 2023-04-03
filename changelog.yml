@@ -1,5 +1,8 @@
 url: https://github.com/tecnodesignc/setting-module
 versions:
+  "2.1.0":
+    changed:
+      - Laravel 10 compatibility
   "2.0.2":
     chnaged:
       - SettingWasCreated in EloquentSettingRepository
