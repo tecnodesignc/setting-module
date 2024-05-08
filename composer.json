@@ -1,7 +1,7 @@
 {
     "name": "tecnodesignc/setting-module",
     "type": "encore-module",
-    "description": "Setting module for EncoreCMS 2.1. Handles all the site settings.",
+    "description": "Setting module for EncoreCMS 3.0. Handles all the site settings.",
     "keywords": [
         "encorecms",
         "settings"
@@ -36,7 +36,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.1.x-dev"
+            "dev-master": "3.0.x-dev"
         }
     },
     "minimum-stability": "dev",
